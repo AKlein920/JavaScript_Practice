@@ -1,0 +1,23 @@
+body {
+  /*background-color: pink;*/
+  text-align: center;
+  height: 100%;
+  margin: 0 auto;
+}
+
+#board {
+  border: 2px solid black;
+  /*width: 80%;*/
+  height: 500px;
+  background-color: pink;
+  position: relative;
+}
+
+.circle {
+  height: 78px;
+  width: 78px;
+  border-radius: 50%;
+  background-color: gold;
+  border: 1px solid black;
+  display: inline-block;
+}
