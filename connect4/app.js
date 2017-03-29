@@ -4,28 +4,28 @@ $(function() {
   toggle = true;
   player1 = {
     divs: [],
-    color: 'purple'
+    color: 'aqua'
   };
   player2 = {
     divs: [],
-    color: 'blue'
+    color: 'orange'
   };
 }); ////////////// end window onload
 
 ////////////// create game board
 var createBoard = function() {
-  var $board = $('<div>').attr('id', 'board').attr('class', 'col-md-10');
-  $('.row').append($board);
+  var $board = $('<div>').attr('id', 'board');
+  $('.box').append($board);
 
   for (var i = 0; i < 42; i++) {
-    $spot = $('<div>').addClass('circle').attr('id', i).text(i)
+    $spot = $('<div>').addClass('circle').attr('id', i);
     $board.append($spot);
     // add hover and event listener IF spot is in bottom row
     if (i >= 35) {
       $spot.hover(function() {
-        $(this).css('border', '3px solid black');
+        $(this).css('background-color', 'lightgray');
       }, function() {
-        $(this).css('border', '1px solid black');
+        $(this).css('background-color', 'white');
       })
       $spot.on('click', firstRowPlacer)
     }
@@ -35,41 +35,43 @@ var createBoard = function() {
 ////////////// click event handler
 var firstRowPlacer = function() {
   if (toggle) {
-    $(this).css('background-color', 'purple').addClass('clicked');;
+    $(this).css('background-color', 'aquamarine').addClass('clicked');;
     player1.divs.push(Number(this.id));
     // console.log(player1);
     if (checkWin(player1.divs)) {
-      alert(player1.color + ' has won');
+      var $winner = $('<h1>').text(player1.color + ' has won');
+      $('#board').append($winner);
     };
 
     var $sevenUp = $(this).siblings('#' + (this.id-7));
     $sevenUp.hover(function() {
-      $(this).css('border', '3px solid black');
+      $(this).css('background-color', 'lightgray');
     }, function() {
-      $(this).css('border', '1px solid black');
+      $(this).css('background-color', 'white');
     })
     $sevenUp.on('click', firstRowPlacer);
     toggle = false;
 
   } else {
-    $(this).css('background-color', 'blue').addClass('clicked');
+    $(this).css('background-color', 'lightsalmon').addClass('clicked');
     player2.divs.push(Number(this.id));
     // console.log(player2);
     if (checkWin(player2.divs)) {
-      alert(player2.color + ' has won');
+      var $winner = $('<h1>').text(player2.color + ' has won');
+      $('#board').append($winner);
     };
 
     var $sevenUp = $(this).siblings('#' + (this.id-7));
     $sevenUp.hover(function() {
-      $(this).css('border', '3px solid black');
+      $(this).css('background-color', 'lightgray');
     }, function() {
-      $(this).css('border', '1px solid black');
+      $(this).css('background-color', 'white');
     })
     $sevenUp.on('click', firstRowPlacer);
     toggle = true;
   }
 
-  $('.clicked').css('border', '1px solid black').off();
+  $('.clicked').off();
 };
 
 ////////////// check for win state
