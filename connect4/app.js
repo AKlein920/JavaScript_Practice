@@ -1,15 +1,17 @@
 ////////////// window onload
 $(function() {
-  createBoard();
   toggle = true;
   player1 = {
     divs: [],
-    color: 'aqua'
+    color: 'Aqua',
+    score: 0
   };
   player2 = {
     divs: [],
-    color: 'orange'
+    color: 'Orange',
+    score: 0
   };
+  createBoard();
 }); ////////////// end window onload
 
 ////////////// create game board
@@ -30,6 +32,11 @@ var createBoard = function() {
       $spot.on('click', firstRowPlacer)
     }
   }
+
+  $('#player1score').text("Aqua's current score: " + player1.score);
+  $('#player2score').text("Orange's current score: " + player2.score);
+
+  $('#reset').on('click', resetBoard);
 };
 
 ////////////// click event handler
@@ -37,10 +44,13 @@ var firstRowPlacer = function() {
   if (toggle) {
     $(this).css('background-color', 'aquamarine').addClass('clicked');;
     player1.divs.push(Number(this.id));
-    // console.log(player1);
+
     if (checkWin(player1.divs)) {
-      var $winner = $('<h1>').text(player1.color + ' has won');
-      $('#board').append($winner);
+      player1.score++;
+      $('.notify').text(player1.color + ' wins!');
+      $('#player1score').text("Aqua's current score: " + player1.score);
+    } else {
+      $('.notify').text(player2.color + "'s turn now");
     };
 
     var $sevenUp = $(this).siblings('#' + (this.id-7));
@@ -57,8 +67,11 @@ var firstRowPlacer = function() {
     player2.divs.push(Number(this.id));
     // console.log(player2);
     if (checkWin(player2.divs)) {
-      var $winner = $('<h1>').text(player2.color + ' has won');
-      $('#board').append($winner);
+      player2.score++;
+      $('.notify').text(player2.color + ' wins!');
+      $('#player2score').text("Orange's current score: " + player2.score)
+    } else {
+      $('.notify').text(player1.color + "'s turn now");
     };
 
     var $sevenUp = $(this).siblings('#' + (this.id-7));
@@ -74,6 +87,15 @@ var firstRowPlacer = function() {
   $('.clicked').off();
 };
 
+////////////// reset event handler
+var resetBoard = function() {
+  toggle = true;
+  player1.divs = [];
+  player2.divs = [];
+  $('#board').remove();
+  createBoard();
+};
+
 ////////////// check for win state
 var checkWin = function(player) {
   for (var i = 0; i < winConditions.length; i++) {
@@ -83,7 +105,7 @@ var checkWin = function(player) {
     for (var j = 0; j < winConditions[i].length; j++) {
       for (var k = 0; k < player.length; k++) {
         if (winConditions[i][j] == player[k]) {
-          console.log(winConditions[i][j] + ' matches ' + player[k]);
+          // console.log(winConditions[i][j] + ' matches ' + player[k]);
           matches++;
           // console.log(matches);
           }
