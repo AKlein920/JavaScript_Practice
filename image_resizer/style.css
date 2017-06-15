@@ -1,0 +1,57 @@
+body {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+#image-holder {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    top: 30px;
+    left: 30px;
+    margin: 0;
+    padding: 0;
+    z-index: 99;
+    border: 3px solid purple;
+    overflow: hidden;
+    z-index: 10000;
+    box-sizing: content-box;
+    /*display:flex;*/
+    /*justify-content:center;*/
+    /*align-items:center;*/
+    background-image: url('https://3.imimg.com/data3/VF/HQ/MY-12923640/pug-puppies-500x500.jpg');
+    background-size: auto;
+    /*padding-top: 50%;*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+#title {
+    text-align: center;
+}
+
+img {
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  position: relative;
+  /*overflow: hiddsen;*/
+  display: block;
+}
+
+.ghostimage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /*top: 30px;*/
+    /*left: 30px;*/
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    /*background-color: blue;*/
+    /*opacity: 0.25;*/
+    overflow: hidden;
+    /*transition: all 1s ease-in-out;*/
+}
